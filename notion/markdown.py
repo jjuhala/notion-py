@@ -195,6 +195,11 @@ def notion_to_markdown(notion):
         if not match:
             raise Exception("Unable to extract text from: %r" % text)
 
+        if text == "\u2023":
+            markdown = '[{1{' + item[1][0][1] + '}1}]({2{'+item[1][0][1]+'}2})'
+            markdown_chunks.append(markdown)
+            continue
+
         leading_whitespace = match.groupdict()["leading"]
         stripped = match.groupdict()["stripped"]
         trailing_whitespace = match.groupdict()["trailing"]
